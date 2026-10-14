@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "archpilot"
+version = "0.1.0"
+description = "ArchPilot — From Idea to Building. A desktop tool for preliminary building design, quantity take-off and cost estimating."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+# FreeCAD is deliberately NOT a dependency: it is installed separately and driven as an
+# external program, never imported.
+dependencies = [
+    "pydantic>=2.6",
+    "PySide6>=6.6",
+    "openpyxl>=3.1",
+    "reportlab>=4.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[project.gui-scripts]
+archpilot = "archpilot.main:main"
+
+[tool.setuptools.packages.find]
+include = ["archpilot*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = ["build", "dist", ".venv"]
+
+[tool.ruff.lint]
+# An intentionally chosen set, not "everything": correctness and clarity, plus the rules that
+# have caught real mistakes in this codebase.
+select = ["E", "F", "W", "I", "UP", "B", "SIM", "C4", "PIE", "RUF"]
+ignore = [
+    # ArchPilot's user-facing text uses real typography (— ² ³) on purpose.
+    "RUF001",
+    "RUF002",
+    "RUF003",
+    # del is used for Optional[...] with runtime semantics in a couple of places.
+    "UP037",
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Tests routinely assert on internals and use long descriptive names.
+"tests/*" = ["B011", "SIM117"]

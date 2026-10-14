@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Tooling caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Packaging output
+installer/Output/
+installer/*.exe
+
+# ArchPilot runtime data — normally under Documents\ArchPilot, but may be redirected here
+# during development with ARCHPILOT_HOME.
+.archpilot/
+*.db
+*.db-journal
+secrets.bin
+archpilot.log
+
+# Editors / OS
+.vscode/
+.idea/
+*.swp
+Thumbs.db
+desktop.ini
